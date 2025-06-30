@@ -10,20 +10,20 @@
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
+    --primary: 262.1 83.3% 57.8%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222.2 84% 4.9%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96%;
-    --accent-foreground: 222.2 84% 4.9%;
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220.9 39.3% 11%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-    --radius: 0.5rem;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 262.1 83.3% 57.8%;
+    --radius: 0.75rem;
   }
 
   .dark {
@@ -33,19 +33,19 @@
     --card-foreground: 210 40% 98%;
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 84% 4.9%;
-    --secondary: 217.2 32.6% 17.5%;
+    --primary: 263.4 70% 50.4%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 215 27.9% 16.9%;
     --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+    --accent: 215 27.9% 16.9%;
     --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 94.1%;
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 263.4 70% 50.4%;
   }
 }
 
@@ -54,13 +54,30 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
   }
 }
 
-/* Custom prose styles for blog content */
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-purple-500 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-purple-600;
+}
+
+/* Enhanced prose styles for blog content */
 .prose {
-  @apply text-foreground;
+  @apply text-foreground max-w-none;
 }
 
 .prose h1,
@@ -69,29 +86,128 @@
 .prose h4,
 .prose h5,
 .prose h6 {
-  @apply text-foreground;
+  @apply text-foreground font-bold;
+  scroll-margin-top: 100px;
+}
+
+.prose h1 {
+  @apply text-4xl mb-6 mt-12 first:mt-0;
+}
+
+.prose h2 {
+  @apply text-3xl mb-4 mt-10 first:mt-0 border-b border-border/40 pb-2;
+}
+
+.prose h3 {
+  @apply text-2xl mb-3 mt-8 first:mt-0;
+}
+
+.prose h4 {
+  @apply text-xl mb-2 mt-6 first:mt-0;
+}
+
+.prose p {
+  @apply text-muted-foreground leading-relaxed mb-4;
 }
 
 .prose a {
-  @apply text-primary hover:text-primary/80;
+  @apply text-purple-600 dark:text-purple-400 no-underline hover:underline font-medium transition-colors;
+}
+
+.prose strong {
+  @apply text-foreground font-semibold;
+}
+
+.prose em {
+  @apply text-foreground italic;
 }
 
 .prose blockquote {
-  @apply border-l-primary text-foreground;
+  @apply border-l-4 border-purple-500 bg-purple-50 dark:bg-purple-950/20 p-6 rounded-r-lg not-italic text-foreground my-6;
+}
+
+.prose blockquote p {
+  @apply text-foreground mb-0;
 }
 
 .prose code {
-  @apply bg-muted text-foreground px-1 py-0.5 rounded;
+  @apply bg-muted text-purple-600 dark:text-purple-400 px-2 py-1 rounded text-sm font-mono;
 }
 
 .prose pre {
-  @apply bg-muted;
+  @apply bg-muted border border-border rounded-lg p-4 overflow-x-auto my-6;
+}
+
+.prose pre code {
+  @apply bg-transparent text-foreground p-0;
+}
+
+.prose ul,
+.prose ol {
+  @apply space-y-2 my-6;
+}
+
+.prose li {
+  @apply text-muted-foreground;
+}
+
+.prose li > p {
+  @apply mb-2;
+}
+
+.prose table {
+  @apply w-full border-collapse border border-border rounded-lg overflow-hidden my-6;
+}
+
+.prose th {
+  @apply bg-muted font-semibold text-foreground p-3 text-left border-b border-border;
+}
+
+.prose td {
+  @apply p-3 border-b border-border text-muted-foreground;
+}
+
+.prose tr:last-child td {
+  @apply border-b-0;
 }
 
 .prose img {
-  @apply rounded-lg;
+  @apply rounded-lg shadow-lg my-6;
 }
 
-p.text-muted-foreground {
-    height: 71.95px;
+.prose hr {
+  @apply border-border my-8;
+}
+
+/* Custom animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Grid background */
+.bg-grid {
+  background-image: linear-gradient(rgba(139, 92, 246, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 92, 246, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Gradient text selection */
+::selection {
+  @apply bg-purple-500/20;
+}
+
+/* Focus styles */
+.focus-visible:focus-visible {
+  @apply outline-none ring-2 ring-purple-500 ring-offset-2 ring-offset-background;
 }

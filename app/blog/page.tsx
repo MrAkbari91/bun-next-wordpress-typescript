@@ -74,7 +74,7 @@ function BlogContent() {
               variant={selectedCategory === category.id ? "default" : "outline"}
               onClick={() => handleCategoryFilter(category.id)}
             >
-              {category.name} ({category.count})
+              <span dangerouslySetInnerHTML={{ __html: category.name }} /> ({category.count})
             </Button>
           ))}
         </div>

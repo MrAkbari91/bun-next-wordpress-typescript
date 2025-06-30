@@ -23,12 +23,15 @@ A modern, production-ready blog frontend built with **Next.js 14**, **TypeScript
 ```
 .
 ├── app/                # App Router pages (home, blog, category, author, etc.)
+│   └── page.tsx        # Home page with hero, latest posts, top categories
 ├── components/         # Reusable UI and feature components
+│   ├── blog-card.tsx   # BlogCard component
+│   ├── loading-skeleton.tsx # Loading skeletons
 │   ├── ui/             # UI primitives (button, card, pagination, etc.)
-│   └── ...             # Feature components (blog-card, header, footer, etc.)
+│   └── ...             # Feature components (header, footer, etc.)
 ├── hooks/              # Custom React hooks
-├── lib/                # API wrappers and utilities
-├── public/             # Static assets
+├── lib/                # API wrappers and utilities (WordPressAPI, etc.)
+├── public/             # Static assets (images, SVGs)
 ├── styles/             # Global and Tailwind CSS files
 ├── types/              # TypeScript types (WordPress, etc.)
 ├── next.config.mjs     # Next.js configuration
@@ -76,7 +79,7 @@ A modern, production-ready blog frontend built with **Next.js 14**, **TypeScript
 
 ## **API Integration**
 
-- Comprehensive WordPress REST API wrapper ([lib/](lib/))
+- Comprehensive WordPress REST API wrapper (`lib/wordpress-api.ts`)
 - Embedded data fetching for authors, featured media, and categories
 - Proper pagination handling
 - Related posts functionality
@@ -135,6 +138,21 @@ NEXT_PUBLIC_WORDPRESS_API_URL=https://your-wordpress-site.com/wp-json/wp/v2
 - **UI Components:** All UI primitives are in [`components/ui/`](components/ui/).
 - **API Logic:** WordPress API integration is in [`lib/`](lib/).
 - **Types:** Extend or modify types in [`types/`](types/).
+
+---
+
+## **Recent Code Changes**
+
+- **Enhanced Home Page (`app/page.tsx`):**
+  - Hero section with gradient backgrounds and call-to-action buttons.
+  - Latest posts grid using `BlogCard` and suspense loading skeletons.
+  - Top categories grid with gradient backgrounds, icons, and post counts.
+  - Responsive and accessible design using Tailwind CSS and semantic HTML.
+  - Improved error handling for empty states.
+- **API Integration:** Uses `WordPressAPI` from `lib/wordpress-api.ts` for fetching posts and categories.
+- **UI Improvements:** Added gradients, hover effects, and dark mode support for category cards and buttons.
+- **Loading States:** Added animated skeletons for both posts and categories.
+- **SEO & Accessibility:** Semantic headings, ARIA labels, and keyboard navigation support.
 
 ---
 
