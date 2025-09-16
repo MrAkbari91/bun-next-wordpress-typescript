@@ -9,8 +9,7 @@ import { BlogCard } from "@/components/blog-card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { htmlToText } from "@/lib/html-to-text"
-// Add the RelatedProducts import at the top
-import { RelatedProducts } from "@/components/related-products"
+import { siteConfig } from "@/config/site"
 
 interface BlogPostPageProps {
   params: {
@@ -62,7 +61,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const categories = post._embedded?.["wp:term"]?.[0] || []
 
   // Get related posts
-  const relatedPosts = await WordPressAPI.getRelatedPosts(post.id, post.categories, 3)
+  const relatedPosts = await WordPressAPI.getRelatedPosts(post.id, post.categories, siteConfig.blog.relatedPostsCount)
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-US", {
@@ -76,7 +75,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const breadcrumbItems = [{ label: "Blog", href: "/blog" }, { label: title }]
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen blog-content-area">
       <div className="container mx-auto px-4 py-8">
         <Breadcrumb items={breadcrumbItems} />
 
@@ -87,7 +86,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </Link>
         </Button>
 
-        <article className="max-w-4xl mx-auto">
+        <article className="max-w-6xl mx-auto">
           {/* Post Header */}
           <header className="mb-12 text-center">
             {categories.length > 0 && (
@@ -105,7 +104,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </div>
             )}
 
-            <h1 className="text-4xl md:text-6xl font-bold mb-8 leading-tight bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-6xl font-bold mb-8 leading-tight bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
               {title}
             </h1>
 
@@ -124,7 +123,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </div>
             </div>
 
-            <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white border-0 rounded-full">
+            <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white border-0 rounded-full">
               <Share2 className="mr-2 h-4 w-4" />
               Share Article
             </Button>
@@ -134,7 +133,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           {featuredImage && (
             <div className="relative aspect-video mb-12 rounded-2xl overflow-hidden shadow-2xl">
               <Image
-                src={featuredImage.source_url || "/placeholder.svg"}
+                src={featuredImage.source_url || "/github_logo_invertocat_dark.webp"}
                 alt={featuredImage.alt_text || title}
                 fill
                 className="object-cover"
@@ -165,9 +164,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </div>
             </section>
           )}
-
-          {/* Related Products */}
-          <RelatedProducts />
         </article>
 
         {/* JSON-LD Structured Data */}

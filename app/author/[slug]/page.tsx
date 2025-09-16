@@ -51,7 +51,7 @@ async function AuthorPosts({ slug, page }: { slug: string; page: number }) {
         <div className="flex items-start space-x-6 mb-6">
           {author.avatar_urls?.["96"] && (
             <Image
-              src={author.avatar_urls["96"] || "/placeholder.svg"}
+              src={author.avatar_urls["96"] || "/github_logo_invertocat_dark.webp"}
               alt={author.name}
               width={96}
               height={96}

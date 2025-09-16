@@ -1,5 +1,6 @@
 import Link from "next/link"
-import { Sparkles, Heart, Github, Twitter, Linkedin } from "lucide-react"
+import { Sparkles } from "lucide-react"
+import { siteConfig } from "@/config/site"
 
 export function Footer() {
   return (
@@ -9,89 +10,69 @@ export function Footer() {
           <div className="space-y-4 md:col-span-2">
             <Link href="/" className="flex items-center space-x-3 group">
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl blur opacity-75"></div>
-                <div className="relative bg-gradient-to-r from-purple-600 to-pink-600 p-2 rounded-xl">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl blur opacity-75"></div>
+                <div className="relative bg-gradient-to-r from-blue-600 to-indigo-600 p-2 rounded-xl">
                   <Sparkles className="h-5 w-5 text-white" />
                 </div>
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                ModernBlog
+              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                {siteConfig.name}
               </span>
             </Link>
-            <p className="text-muted-foreground max-w-md">
-              A beautifully crafted modern blog experience powered by WordPress and Next.js. Discover amazing content
-              with stunning design and seamless performance.
-            </p>
-            <div className="flex items-center space-x-4">
-              <a href="#" className="text-muted-foreground hover:text-purple-600 transition-colors">
-                <Twitter className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-purple-600 transition-colors">
-                <Github className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-purple-600 transition-colors">
-                <Linkedin className="h-5 w-5" />
-              </a>
-            </div>
+            <p className="text-muted-foreground max-w-md">{siteConfig.footer.description}</p>
+            {/* <div className="flex items-center space-x-4">
+              {siteConfig.socialIcons.map((social) => {
+                const IconComponent = social.icon
+                const href = siteConfig.author.social[social.href as keyof typeof siteConfig.author.social]
+                return (
+                  <a
+                    key={social.name}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-blue-600 transition-colors"
+                    title={social.name}
+                  >
+                    <IconComponent className="h-5 w-5" />
+                  </a>
+                )
+              })}
+            </div> */}
           </div>
 
           <div className="space-y-4">
-            <h4 className="text-sm font-semibold text-foreground">Quick Links</h4>
+            <h4 className="text-sm font-semibold text-foreground">{siteConfig.footer.sections.quickLinks.title}</h4>
             <ul className="space-y-3 text-sm">
-              <li>
-                <Link href="/" className="text-muted-foreground hover:text-purple-600 transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog" className="text-muted-foreground hover:text-purple-600 transition-colors">
-                  All Posts
-                </Link>
-              </li>
-              <li>
-                <Link href="/categories" className="text-muted-foreground hover:text-purple-600 transition-colors">
-                  Categories
-                </Link>
-              </li>
+              {siteConfig.footer.sections.quickLinks.links.map((link) => (
+                <li key={link.name}>
+                  <Link href={link.href} className="text-muted-foreground hover:text-blue-600 transition-colors">
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div className="space-y-4">
-            <h4 className="text-sm font-semibold text-foreground">Categories</h4>
+            <h4 className="text-sm font-semibold text-foreground">{siteConfig.footer.sections.categories.title}</h4>
             <ul className="space-y-3 text-sm">
-              <li>
-                <Link
-                  href="/category/technology"
-                  className="text-muted-foreground hover:text-purple-600 transition-colors"
-                >
-                  Technology
-                </Link>
-              </li>
-              <li>
-                <Link href="/category/design" className="text-muted-foreground hover:text-purple-600 transition-colors">
-                  Design
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/category/development"
-                  className="text-muted-foreground hover:text-purple-600 transition-colors"
-                >
-                  Development
-                </Link>
-              </li>
+              {siteConfig.footer.sections.categories.links.map((link) => (
+                <li key={link.name}>
+                  <Link href={link.href} className="text-muted-foreground hover:text-blue-600 transition-colors">
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
         <div className="mt-12 pt-8 border-t border-border/40">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-            <p className="text-sm text-muted-foreground">&copy; 2025 Dhruv Akbari. All rights reserved.</p>
-            <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-              <span>Made with</span>
-              <Heart className="h-4 w-4 text-red-500 fill-current" />
-              <span>using Next.js & WordPress</span>
-            </div>
+            <p className="text-sm text-muted-foreground">
+              &copy; 2025 {siteConfig.author.name}. {siteConfig.footer.copyright}
+            </p>
+            <div className="text-sm text-muted-foreground">{siteConfig.footer.madeWith}</div>
           </div>
         </div>
       </div>

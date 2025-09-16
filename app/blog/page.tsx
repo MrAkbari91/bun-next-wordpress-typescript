@@ -8,6 +8,7 @@ import { BlogCard } from "@/components/blog-card"
 import { Pagination } from "@/components/pagination"
 import { BlogGridSkeleton } from "@/components/loading-skeleton"
 import { Button } from "@/components/ui/button"
+import { siteConfig } from "@/config/site"
 
 function BlogContent() {
   const searchParams = useSearchParams()
@@ -27,7 +28,7 @@ function BlogContent() {
         const [postsData, categoriesData] = await Promise.all([
           WordPressAPI.getPosts({
             page: currentPage,
-            per_page: 9,
+            per_page: siteConfig.blog.postsPerPage,
             categories: selectedCategory || undefined,
           }),
           WordPressAPI.getCategories(),

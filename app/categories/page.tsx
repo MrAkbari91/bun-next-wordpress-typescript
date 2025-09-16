@@ -23,11 +23,11 @@ export default async function CategoriesPage() {
             <Link key={category.id} href={`/category/${category.slug}`}>
               <Card className="hover:shadow-lg transition-shadow h-full">
                 <CardHeader>
-                  <CardTitle className="text-lg">{category.name}</CardTitle>
+                  <CardTitle className="text-lg" dangerouslySetInnerHTML={{ __html: category.name }} />
                 </CardHeader>
                 <CardContent>
                   {category.description && (
-                    <p className="text-muted-foreground text-sm mb-3 line-clamp-3">{category.description}</p>
+                    <p className="text-muted-foreground text-sm mb-3 line-clamp-3" dangerouslySetInnerHTML={{ __html: category.description }}></p>
                   )}
                   <p className="text-sm font-medium text-primary">{category.count} posts</p>
                 </CardContent>
